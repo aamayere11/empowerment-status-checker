@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -15,7 +14,6 @@ const [loading, setLoading] = useState(false);
 }
 
 setLoading(true);
-setLoading(true);
     const res = await fetch("/api/check-status", {
       method: "POST",
       headers: {
@@ -26,7 +24,6 @@ setLoading(true);
 
     const data = await res.json();
     setLoading(false);
-setLoading(false);
     if (data.success) {
       setResult(
   `Congratulations ${data.applicant.name}! Status: ${data.applicant.status}`
@@ -69,20 +66,14 @@ setLoading(false);
           value={nin}
           onChange={(e) => setNin(e.target.value)}
           placeholder="Enter your NIN Number"
-          className="w-full border p-3 rounded mt-6"
+          className="w-full border p-3 rounded mt-6 bg-white text-black placeholder-gray-500"
         />
 <button
-  onClick={checkStatus}
-  disabled={loading}
-  className="w-full bg-green-700 text-white p-3 rounded mt-4 hover:bg-green-800 disabled:bg-gray-400"
->
- <button
   onClick={checkStatus}
   disabled={loading}
   className="w-full bg-green-700 hover:bg-green-800 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
 >
   {loading ? "Checking..." : "Check Status"}
-</button>
 </button>
 
        {result && (
