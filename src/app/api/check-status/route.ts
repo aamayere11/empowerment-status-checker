@@ -10,9 +10,12 @@ export async function POST(req: Request) {
     const db = client.db("empowerment");
 
     const applicant = await db.collection("applicants").findOne({
-  nin: nin,
-
-    });
+  $or: [
+    { nin: nin },
+    { NIN: Number(nin) },
+    { NIN: nin }
+  ],
+});
 
     console.log("NIN received:", nin);
     console.log("Applicant:", applicant);
@@ -25,15 +28,15 @@ export async function POST(req: Request) {
     }
 console.log(Object.keys(applicant));
 console.log("Keys:", Object.keys(applicant));
-   return NextResponse.json({
+  return NextResponse.json({
   success: true,
   applicant: {
-   name: applicant.name,
-status: applicant.status,
-gender: applicant.gender,
-phone: applicant.phone,
-nin: applicant.nin,
-lga: applicant.lga,
+    name: applicant.name || applicant.Name,
+    status: applicant.status || applicant["STATUS "],
+    gender: applicant.gender || applicant.Gender,
+    phone: applicant.phone || applicant.Phone,
+    nin: applicant.nin || applicant.NIN,
+    lga: applicant.lga || applicant.LGA,
   },
 });
   } catch (error) {
