@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const db = client.db("empowerment");
 
     const applicant = await db.collection("applicants").findOne({
-  NIN: Number(nin),
+  nin: nin,
 
     });
 
@@ -28,12 +28,12 @@ console.log("Keys:", Object.keys(applicant));
    return NextResponse.json({
   success: true,
   applicant: {
-    name: applicant.Name,
-   status: applicant["STATUS "],
-    gender: applicant.Gender,
-    phone: applicant.Phone,
-    nin: applicant.NIN,
-    lga: applicant.LGA,
+   name: applicant.name,
+status: applicant.status,
+gender: applicant.gender,
+phone: applicant.phone,
+nin: applicant.nin,
+lga: applicant.lga,
   },
 });
   } catch (error) {
